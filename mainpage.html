@@ -1,0 +1,83 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title>Search Movie</title>
+
+  <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script> -->
+
+  <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+  <link href="css/ionic.app.css" rel="stylesheet">
+  -->
+
+  <!-- ionic/angularjs js -->
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="cordova.js"></script>
+
+  <!-- your app's js -->
+  <script src="main.js" ></script>
+</head>
+<body ng-app="movieFinder" ng-controller="movieSearch">
+
+    <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button class="button-clear">
+        <i class="ion-arrow-left-c"></i> Back
+      </ion-nav-back-button>
+    </ion-nav-bar>
+
+    <ion-nav-view></ion-nav-view>
+
+    <!-- Modal content area -->
+      <script id="movieList.html" type="text/ng-template">
+        <ion-view view-title="Search Movie">
+          <ion-content>
+            <label class="item item-input">
+              <input type="search" placeholder="Which Movie are you Searching?" ng-model="model.searchbox" >
+              <button  ng-click="findMovies()" class="button button-block button-assertive">Search Movie</button>
+            </label>
+            <ion-list>
+              <ion-list >
+                <ion-item item="group" collection-repeat="rec in model.searchList" collection-item-width="'100%'" collection-item-height="100" href="#/movie/{{movie.id}}" class="item-thumbnail-left" hold-list>
+                  <!-- <img ng-src="https://image.tmdb.org/t/p/w92{{movie.poster_path}}" onerror="this.src = 'https://www.ginesisnatural.com/images/no_image.jpg';">
+                  -->
+                  <h2>{{rec.Title}}</h2>
+                  <h4>{{rec.date}}</h4>
+                </ion-item>
+              </ion-list>
+            </ion-list>
+          </ion-content>
+        </ion-view>
+      </script>
+     <!-- <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="Which Movie are you Searching?" ng-model="model.searchbox">
+          </label>
+        </div>
+
+        <div class="padding">
+          <button  ng-click="findMovies()" class="button button-block button-assertive">Search Movie</button>
+        </div>
+
+        <div class="list list-inset">
+          <div ng-repeat="rec in model.searchList" class="item">{{rec.Title}}</div>
+        </div>
+-->
+     <!-- <div class="padding">
+        <button  ng-click="findMovies()" class="button button-block button-assertive">Next</button>
+        <button  ng-click="findMovies()" class="button button-block button-assertive">Prev</button>
+
+      </div>-->
+      <script id="movieInfo.html" type="text/ng-template">
+        <ion-view view-title="Movie details">
+          <ion-content>
+
+          </ion-content>
+        </ion-view>
+      </script>
+
+</body>
+</html>

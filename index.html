@@ -1,0 +1,104 @@
+<html ng-app="movieFinder">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title>Search Movie</title>
+
+  <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+  <script src="cordova.js"></script>
+
+  <script src="main.js" ></script>
+
+</head>
+<body style="overflow: scroll">
+
+<ion-nav-bar class="bar-positive">
+  <ion-nav-back-button class="button-clear">
+    <i class="ion-arrow-left-c"></i> Back
+  </ion-nav-back-button>
+</ion-nav-bar>
+
+<ion-nav-view></ion-nav-view>
+
+<script id="movieList.html" type="text/ng-template">
+  <ion-view view-title="My Movie Finder">
+    <ion-nav-bar class="bar-assertive">
+    </ion-nav-bar>
+    <ion-content>
+      <label class="item item-input">
+        <input type="search" placeholder="Which Movie are you Searching?" ng-model="model.searchbox" ng-change="findMovies()" >
+      </label>
+      <div ng-hide="model.totalResults<=10" class = "row" style="width: 100%">
+        <div class = "col">
+          <a  class="button icon-left ion-chevron-left button-clear button-dark" ng-click="previousPage()">Previous page</a>
+        </div>
+        <div class = "col" style="margin-left: 225px;margin-top: 11px;">{{model.currentPage}}/{{model.totalPages}}</div>
+        <div class = "col"><a style="float: right"  class="button icon-right ion-chevron-right button-clear button-dark" ng-click="nextPage()">Next page</a>
+        </div>
+      </div>
+
+        <ion-list>
+
+          <ion-item item="group" collection-repeat="rec in model.searchList" collection-item-width="'100%'" collection-item-height="100" href="#/movieInfo/{{rec.imdbID}}" class="item-thumbnail-left" hold-list>
+             <img ng-src="{{rec.Poster}}" />
+
+            <h2>{{rec.Title}}</h2>
+            <h4>Release Year : {{rec.Year}}</h4>
+            <h4>IMBD : {{rec.imdbID}}</h4>
+            <h4>Type : {{rec.Type}}</h4>
+          </ion-item>
+
+      </ion-list>
+    </ion-content>
+  </ion-view>
+</script>
+<script id="movieInfo.html" type="text/ng-template">
+  <ion-view view-title="Movie details" class="bar-royal">
+    <ion-content>
+      <div class="list card">
+        <div class="item">
+          <img ng-src="{{viewModel.Poster}}" width="200px" height="200px" />
+        </div>
+        <div class="item " style="font-family:'Times New Roman';font-weight: bold">
+         Title : {{viewModel.Title}}
+        </div>
+        <div class="item ">
+          Year : {{viewModel.Year}}
+        </div>
+        <div class="item ">
+          Released Date : {{viewModel.Released}}
+        </div>
+        <div class="item ">
+          Genre : {{viewModel.Genre}}
+        </div>
+        <div class="item ">
+          Director : {{viewModel.Director}}
+        </div>
+        <div class="item ">
+          Writer : {{viewModel.Writer}}
+        </div>
+        <div class="item ">
+          Actors : {{viewModel.Actors}}
+        </div>
+        <div class="item " style="height: 50px;">
+          Plot : {{viewModel.Plot}}
+        </div>
+        <div class="item ">
+          Language : {{viewModel.Language}}
+        </div>
+        <div class="item ">
+          Country : {{viewModel.Country}}
+        </div>
+        <div class="item ">
+          IMDB Rating : {{viewModel.imdbRating}}
+        </div>
+      </div>
+    </ion-content>
+  </ion-view>
+</script>
+
+</body>
+</html>
